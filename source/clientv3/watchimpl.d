@@ -15,7 +15,7 @@ alias Type = Event.EventType;
 class WatchImpl
 {
 
-    class NotifyItem
+    static class NotifyItem
     {
         long ID;            ///
         Type op;
@@ -33,7 +33,7 @@ class WatchImpl
     Watcher createWatcher(WatchNotify notify)
     {
         auto stream = client.Watch();
-        return new Watcher(stream);
+        return new Watcher(stream , notify);
     }
 
 }
