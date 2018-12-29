@@ -52,7 +52,6 @@ class Watcher
             WatchResponse response;
             while(stream.read(response))
             {
-                logError("reponse.id " , response.watchId );
                 if(response.created)
                 {
                     creates[0].done(response);

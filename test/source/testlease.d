@@ -32,10 +32,26 @@ void testNormal(LeaseImpl impl)
     assert(impl.revoke(ID));
     assert(impl.timeToLive(ID , res));
     assert(res.grantedTTL == 0 && res.TTL == -1);
+    logInfo("test ok");
 }
 
 void testWithKeepAlive(LeaseImpl impl)
 {
+    import core.thread;
+    long ttl = 10;
+    long ID;
+    assert(impl.grant(ttl , ID));
+    impl.openKeepalive(ID);
+    
+    LeaseImpl.TimeToLiveRes res;
+    Thread.sleep(dur!"seconds"(20));
+    assert(impl.timeToLive(ID , res));
+    assert(res.ID == ID && res.grantedTTL == ttl);
+    impl.closeKeepalive(ID);
 
+    Thread.sleep(dur!"seconds"(20));
+    assert(impl.timeToLive(ID , res));
+    assert(res.grantedTTL == 0 && res.TTL == -1);
+    logInfo("test ok");
 }
 

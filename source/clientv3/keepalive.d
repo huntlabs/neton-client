@@ -40,7 +40,7 @@ class KeepAlive
     {
         timer.stop();
         stream.writesDone();
-        stream.finish(); 
-        return true;   
+        auto status = stream.finish(); 
+        return status.ok();   
     }
 }

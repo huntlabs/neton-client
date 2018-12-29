@@ -69,6 +69,7 @@ void testNormal(Channel channel)
     assert(kvimpl.del(KEY2));
     Thread.sleep(dur!"seconds"(1));
     assert(cnt == 5);
+    logInfo("test ok");
     
 
 }
