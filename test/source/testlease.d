@@ -38,18 +38,18 @@ void testNormal(LeaseImpl impl)
 void testWithKeepAlive(LeaseImpl impl)
 {
     import core.thread;
-    long ttl = 10;
+    long ttl = 3;
     long ID;
     assert(impl.grant(ttl , ID));
     impl.openKeepalive(ID);
     
     LeaseImpl.TimeToLiveRes res;
-    Thread.sleep(dur!"seconds"(20));
+    Thread.sleep(dur!"seconds"(4));
     assert(impl.timeToLive(ID , res));
     assert(res.ID == ID && res.grantedTTL == ttl);
     impl.closeKeepalive(ID);
 
-    Thread.sleep(dur!"seconds"(20));
+    Thread.sleep(dur!"seconds"(4));
     assert(impl.timeToLive(ID , res));
     assert(res.grantedTTL == 0 && res.TTL == -1);
     logInfo("test ok");

@@ -23,6 +23,9 @@ class Watcher
         request. _requestUnionCase = WatchRequest.RequestUnionCase.createRequest;
         request._createRequest = new WatchCreateRequest();
         request._createRequest.key = cast(ubyte[])key;
+        ubyte[] end = cast(ubyte[])key.dup;
+         request._createRequest.rangeEnd = end;
+        end[$ - 1] += 1;
         stream.write(request);
         auto f = new Future!(int ,WatchResponse)(0);
         creates ~= f;

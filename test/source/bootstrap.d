@@ -3,6 +3,7 @@ module bootstrap;
 import testkv;
 import testlease;
 import testwatch;
+import testservice;
 import grpc;
 import hunt.net;
 
@@ -14,5 +15,6 @@ int main()
     testKV(channel);
     testLease(channel);
     testWatch(channel);
+    testService(channel);
     return 0;
 }

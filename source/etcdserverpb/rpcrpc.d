@@ -89,9 +89,9 @@ class WatchClient
 		_channel = channel;
 	}
 
-	ClientReaderWriter!(WatchResponse , WatchRequest) Watch(){
-		mixin(CM3!( WatchResponse ,WatchRequest , WatchBase.SERVICE));
-}
+	ClientReaderWriter!(WatchResponse ,WatchRequest) Watch(){
+		mixin(CM3!(WatchResponse , WatchRequest  , WatchBase.SERVICE));
+	}
 
 	private:
 	Channel _channel;
@@ -145,9 +145,9 @@ class LeaseClient
 		mixin(CMA!(LeaseRevokeResponse , LeaseBase.SERVICE));
 	}
 
-	ClientReaderWriter!(LeaseKeepAliveResponse,LeaseKeepAliveRequest) LeaseKeepAlive(){
+	ClientReaderWriter!(LeaseKeepAliveResponse ,LeaseKeepAliveRequest) LeaseKeepAlive(){
 		mixin(CM3!(LeaseKeepAliveResponse , LeaseKeepAliveRequest  , LeaseBase.SERVICE));
-}
+	}
 	Status LeaseTimeToLive( LeaseTimeToLiveRequest request , ref LeaseTimeToLiveResponse response)
 	{
 		mixin(CM!(LeaseBase.SERVICE));

@@ -17,9 +17,23 @@ class KVImpl
 
     bool get(string key , ref string value)
     {
+        string[] values;
+        if(!get(key , values))
+            return false;
+        if(values.length == 0)
+            value = "";
+        else
+            value = values[0];
+        return true;
+    }
+
+    bool get(string key , ref string[] values)
+    {
         RangeRequest request = new RangeRequest();
         request.key = cast(ubyte[])key;
-        request.limit = 1;
+        ubyte[] end = cast(ubyte[])key.dup;
+        end[$ - 1] += 1;
+        request.rangeEnd = end;
         RangeResponse response;
         auto status = client.Range( request , response);
         if(!status.ok())
@@ -27,12 +41,15 @@ class KVImpl
             logError(status.errorMessage);
             return false;
         }
-        if(response.count == 0)
-            value = "";
-        else
-            value = cast(string)response.kvs[0].value;
+
+        foreach(v ; response.kvs)
+        {
+            values ~= cast(string)v.value;
+        }
+
         return true;
     }
+
 
     bool put(string key , string value , long leaseID = 0)
     {
