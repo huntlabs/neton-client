@@ -44,13 +44,16 @@ void testWithKeepAlive(LeaseImpl impl)
     impl.openKeepalive(ID);
     
     LeaseImpl.TimeToLiveRes res;
-    Thread.sleep(dur!"seconds"(4));
+    // Thread.sleep(dur!"seconds"(4));
     assert(impl.timeToLive(ID , res));
+    import std.format;
+    logInfo("(ID , grantedTTL) : (%s , %s)".format(res.ID,res.grantedTTL));
     assert(res.ID == ID && res.grantedTTL == ttl);
     impl.closeKeepalive(ID);
 
     Thread.sleep(dur!"seconds"(4));
     assert(impl.timeToLive(ID , res));
+    logInfo("(ID , TTL , grantedTTL) : (%s , %s,%s)".format(res.ID,res.TTL,res.grantedTTL));
     assert(res.grantedTTL == 0 && res.TTL == -1);
     logInfo("test ok");
 }

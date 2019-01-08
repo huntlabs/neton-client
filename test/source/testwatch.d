@@ -26,6 +26,7 @@ void testNormal(Channel channel)
     long ID1;
     long ID2;
     auto watcher = impl.createWatcher((WatchImpl.NotifyItem item){
+        logInfo("in watch cnt: ",cnt," op : ",item.op," key :",item.key," value: ",item.value, " item.ID :",item.ID," ID1: ",ID1," ID2: ",ID2);
         if(cnt == 0)
         {
             assert(item.ID == ID1 && 
@@ -51,23 +52,35 @@ void testNormal(Channel channel)
         cnt++;
         assert(cnt <= 5);
     });
+    logInfo("watch 1");
     assert(watcher.watch(KEY1 , ID1));
+    logInfo("watch 2");
     assert(watcher.watch(KEY2 , ID2));
 
     auto kvimpl = new KVImpl(channel);
+    logInfo("put 1");
     assert(kvimpl.put(KEY1 , VALUE1));
+    logInfo("put 2");
     assert(kvimpl.put(KEY2 , VALUE2));
+    logInfo("del 1");
     assert(kvimpl.del(KEY1));
+    logInfo("del 2");
     assert(kvimpl.del(KEY2));
 
+    logInfo("cancel 1");
     assert(watcher.cancel(ID1));
+    logInfo("put 1");
     kvimpl.put(KEY1 , VALUE1);
+    logInfo("put 2");
     kvimpl.put(KEY2 , VALUE2);
     
+    logInfo("cancel 2");
     assert(watcher.cancel(ID2));
+    logInfo("del 1");
     assert(kvimpl.del(KEY1));
+    logInfo("del 2");
     assert(kvimpl.del(KEY2));
-    Thread.sleep(dur!"seconds"(1));
+    Thread.sleep(dur!"seconds"(2));
     assert(cnt == 5);
     logInfo("test ok");
     

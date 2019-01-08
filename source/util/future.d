@@ -32,7 +32,9 @@ class Future(Req , Res)
     {
         trace("condition notify ...");
         _out = out_;
+        _condition.mutex().lock();
         _condition.notify();
+        _condition.mutex().unlock();
     }
 
     Req data() @property

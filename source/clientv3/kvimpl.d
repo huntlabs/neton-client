@@ -41,7 +41,8 @@ class KVImpl
             logError(status.errorMessage);
             return false;
         }
-
+        if(response is null )
+            return true;
         foreach(v ; response.kvs)
         {
             values ~= cast(string)v.value;

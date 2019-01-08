@@ -42,6 +42,13 @@ class Service
         return true;
     }
 
+    bool deregisterAll(string serviceName)
+    {
+        if(!kv.del(serviceName))
+            return false;
+        return true;
+    }
+
     Meta[] getAllInstances(string serviceName)
     {
         

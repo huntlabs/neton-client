@@ -49,6 +49,8 @@ void testNormal(Service service , Channel channel)
             case 4:
                 assert(item.key == SERVICE ~ "/" ~ ADDR2 && item.op == Type.DELETE);
                 break;
+            case 5:
+                assert(item.key == SERVICE && item.op == Type.DELETE);
             default:
                 assert(0);
         }
@@ -61,9 +63,11 @@ void testNormal(Service service , Channel channel)
     service.registerInstance(SERVICE , ADDR2 );
     service.registerInstance(SERVICE , ADDR3 );
     list = service.getAllInstances(SERVICE);
+    logInfo("service list1 : ",list);
     assert(list.length == 3 && list[0].addr == ADDR1 && list[1].addr == ADDR2 && list[2].addr == ADDR3 );
     service.deregisterInstance(SERVICE , ADDR1);
     list = service.getAllInstances(SERVICE);
+    logInfo("service list2 : ",list);
     assert(list.length == 2 && list[0].addr == ADDR2 && list[1].addr == ADDR3 );
     service.deregisterInstance(SERVICE , ADDR2);
 
@@ -71,8 +75,12 @@ void testNormal(Service service , Channel channel)
 
     service.deregisterInstance(SERVICE , ADDR3);
     list = service.getAllInstances(SERVICE);
+    logInfo("service list3 : ",list);
     assert(list.length == 0);
-    Thread.sleep(dur!"seconds"(1));
+    service.deregisterAll(SERVICE);
+
+    Thread.sleep(dur!"seconds"(3));
+    logError(" ---cnt : ",cnt);
     assert(cnt == 5);
 }
 

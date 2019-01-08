@@ -53,30 +53,42 @@ class Watcher
 
         new Thread((){
             WatchResponse response;
-            while(stream.read(response))
-            {
-                if(response.created)
+            try{
+                while(stream.read(response))
                 {
-                    creates[0].done(response);
-                    creates = creates[1 .. $];               
-                }
-                else if(response.canceled)  
-                {
-                    cancels[0].done(response);
-                    cancels = cancels[1 .. $];
-                }
-                else{
-                    foreach(e ; response.events)
+                    logError("begin " , );
+                    if(response.created)
                     {
-                        auto item = new WatchImpl.NotifyItem();
-                        item.ID = response.watchId;
-                        item.key = cast(string)e.kv.key;
-                        item.value = cast(string)e.kv.value;
-                        item.op = e.type;
-                        notify(item);
-                    }    
+                        logError("created " , response.watchId);
+                        creates[0].done(response);
+                        creates = creates[1 .. $];               
+                    }
+                    else if(response.canceled)  
+                    {
+                        logError("canceled " , response.watchId);
+                        cancels[0].done(response);
+                        cancels = cancels[1 .. $];
+                    }
+                    else{
+                        logError("other ");
+                        foreach(e ; response.events)
+                        {
+                            auto item = new WatchImpl.NotifyItem();
+                            item.ID = response.watchId;
+                            item.key = cast(string)e.kv.key;
+                            item.value = cast(string)e.kv.value;
+                            item.op = e.type;
+                            logError("errr start " , response.watchId);
+                            notify(item);
+                            logError("errr end " , response.watchId);
+                        }    
+                    }
+                    logError("end");
                 }
+            }catch(Throwable e){
+                logError(e.msg);
             }
+            logError("in false");
         }).start();
     }
 
