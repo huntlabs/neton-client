@@ -4,10 +4,10 @@ import grpc;
 import clientv3;
 
 import hunt.logging;
-import hunt.util.serialize;
+import hunt.util.Serialize;
 import core.thread;
 import core.time;
-import hunt.util.serialize;
+import hunt.util.Serialize;
 
 void testService(Channel channel)
 {

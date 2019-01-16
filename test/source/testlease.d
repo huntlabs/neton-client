@@ -3,7 +3,7 @@ module testlease;
 import grpc;
 import clientv3;
 import hunt.logging;
-import hunt.util.serialize;
+import hunt.util.Serialize;
 
 void testLease(Channel channel)
 {

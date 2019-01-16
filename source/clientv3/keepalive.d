@@ -1,8 +1,8 @@
 module clientv3.keepalive;
 
-import hunt.util.timer;
+import hunt.util.Timer;
 import hunt.event.timer;
-import hunt.event.timer.common;
+import hunt.event.timer.Common;
 import core.thread;
 import hunt.net;
 import etcdserverpb.rpcrpc;

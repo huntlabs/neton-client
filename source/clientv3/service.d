@@ -6,7 +6,7 @@ import clientv3.kvimpl;
 
 import grpc;
 import hunt.logging;
-import hunt.util.serialize;
+import hunt.util.Serialize;
 
 
 class Service
