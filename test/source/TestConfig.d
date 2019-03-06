@@ -1,7 +1,6 @@
 module TestConfig;
 
 import grpc;
-import clientv3;
 
 import hunt.logging;
 import hunt.util.Serialize;
@@ -11,16 +10,15 @@ import client.config.ConfigService;
 import client.Listener;
 import client.Event;
 
-void testConfig(Channel channel)
+void testConfig(ConfigService service)
 {
-    testNormal(channel);
+    testNormal(service);
     logInfo("test config ok");
 }
 
 
-void testNormal(Channel channel)
+void testNormal(ConfigService impl)
 {
-    ConfigService impl = new ConfigService(channel);
     enum KEY1 = "key1";
     enum VALUE1 = "value1";
     enum KEY2 = "key2";

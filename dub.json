@@ -9,7 +9,7 @@
 	"dependencies":{
 		
 		"hunt-grpc":{
-			"path": "../hunt-grpc"
+			"version": "~>0.1.3"
 		}
     }
 }

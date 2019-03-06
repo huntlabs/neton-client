@@ -2,6 +2,8 @@ module bootstrap;
 
 import grpc;
 import hunt.net;
+import client.NetonFactory;
+import client.NetonOption;
 
 import TestRegistry;
 import TestConfig;
@@ -10,10 +12,10 @@ import TestConfig;
 int main()
 {
 
-    auto channel = new GrpcClient("127.0.0.1", 50051);
+    NetonOption option = {"127.0.0.1", 50051};
     NetUtil.startEventLoop();
 
-    testRegistry(channel);
-    testConfig(channel);
+    testRegistry(NetonFactory.createRegistryService(option));
+    testConfig(NetonFactory.createConfigService(option));
     return 0;
 }

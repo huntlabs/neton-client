@@ -14,15 +14,14 @@ import client.Listener;
 import client.Event;
 
 
-void testRegistry(Channel channel)
+void testRegistry(RegistryService service)
 {
-    auto service = new RegistryService(channel);
-    testNormal(service , channel);
+    testNormal(service);
     logInfo("test registry ok");
 }
 
 
-void testNormal(RegistryService service , Channel channel)
+void testNormal(RegistryService service)
 {
     enum SERVICE = "test";
     enum PORT = 1001;
@@ -47,15 +46,15 @@ void testNormal(RegistryService service , Channel channel)
     list = service.getAllInstances(SERVICE);
     logInfo("service list1 : ",list);
     assert(list.length == 3 && list[0].ip == ADDR1 && list[1].ip == ADDR2 && list[2].ip == ADDR3 );
+
     service.deregisterInstance(SERVICE , ADDR1,PORT);
     Thread.sleep(dur!"seconds"(1));
 
     list = service.getAllInstances(SERVICE);
     logInfo("service list2 : ",list);
     assert(list.length == 2 && list[0].ip == ADDR2 && list[1].ip == ADDR3 );
+
     service.deregisterInstance(SERVICE , ADDR2,PORT);
-
-
     service.deregisterInstance(SERVICE , ADDR3,PORT);
     Thread.sleep(dur!"seconds"(1));
 
