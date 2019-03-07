@@ -1,11 +1,11 @@
-module client.config.ConfigService;
+module neton.client.config.ConfigService;
 
-import etcdserverpb.kv;
-import etcdserverpb.rpc;
-import etcdserverpb.rpcrpc;
-import client.Listener;
-import client.WatchFactory;
-import client.Watcher;
+import neton.protocol.neton;
+import neton.protocol.neton;
+import neton.protocol.netonrpc;
+import neton.client.Listener;
+import neton.client.WatchFactory;
+import neton.client.Watcher;
 import grpc;
 import hunt.logging;
 

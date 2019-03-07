@@ -6,9 +6,9 @@ import hunt.logging;
 import hunt.util.Serialize;
 import core.thread;
 import core.time;
-import client.config.ConfigService;
-import client.Listener;
-import client.Event;
+import neton.client.config.ConfigService;
+import neton.client.Listener;
+import neton.client.Event;
 
 void testConfig(ConfigService service)
 {

@@ -1,4 +1,4 @@
-module util.future;
+module neton.util.future;
 import core.sync.condition;
 import core.sync.mutex;
 import hunt.logging;

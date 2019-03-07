@@ -1,6 +1,6 @@
-module client.Listener;
+module neton.client.Listener;
 
-import client.Event;
+import neton.client.Event;
 
 /**
  * Listener for watch config/reistry

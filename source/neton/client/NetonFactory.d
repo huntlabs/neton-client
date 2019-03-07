@@ -1,8 +1,8 @@
-module client.NetonFactory;
+module neton.client.NetonFactory;
 
-import client.config.ConfigService;
-import client.registry.RegistryService;
-import client.NetonOption;
+import neton.client.config.ConfigService;
+import neton.client.registry.RegistryService;
+import neton.client.NetonOption;
 import grpc;
 
 class NetonFactory

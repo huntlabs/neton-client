@@ -2,8 +2,8 @@ module bootstrap;
 
 import grpc;
 import hunt.net;
-import client.NetonFactory;
-import client.NetonOption;
+import neton.client.NetonFactory;
+import neton.client.NetonOption;
 
 import TestRegistry;
 import TestConfig;

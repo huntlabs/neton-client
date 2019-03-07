@@ -1,8 +1,8 @@
 module TestRegistry;
 
 import grpc;
-import client.registry.RegistryService;
-import client.registry.Instance;
+import neton.client.registry.RegistryService;
+import neton.client.registry.Instance;
 
 import hunt.logging;
 import hunt.util.Serialize;
@@ -10,8 +10,8 @@ import core.thread;
 import core.time;
 import hunt.util.Serialize;
 import std.conv;
-import client.Listener;
-import client.Event;
+import neton.client.Listener;
+import neton.client.Event;
 
 
 void testRegistry(RegistryService service)

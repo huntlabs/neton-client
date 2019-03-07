@@ -1,4 +1,4 @@
-module client.Event;
+module neton.client.Event;
 
 struct Event
 {

@@ -1,4 +1,4 @@
-module client.registry.Instance;
+module neton.client.registry.Instance;
 
 struct Instance
 {

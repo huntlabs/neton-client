@@ -1,8 +1,8 @@
-module client.WatchFactory;
+module neton.client.WatchFactory;
 
-import client.Watcher;
+import neton.client.Watcher;
 
-import etcdserverpb.rpcrpc;
+import neton.protocol.netonrpc;
 import grpc;
 
 class WatchFactory

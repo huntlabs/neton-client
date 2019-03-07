@@ -1,8 +1,8 @@
-module client.registry.RegistryService;
+module neton.client.registry.RegistryService;
 
-import etcdserverpb.kv;
-import etcdserverpb.rpc;
-import etcdserverpb.rpcrpc;
+import neton.protocol.neton;
+import neton.protocol.neton;
+import neton.protocol.netonrpc;
 
 import grpc;
 import hunt.logging;
@@ -10,11 +10,11 @@ import hunt.util.Serialize;
 import std.conv;
 import std.json;
 
-import client.registry.Instance;
-import client.Listener;
-import client.WatchFactory;
-import client.Watcher;
-import client.registry.HeartBeat;
+import neton.client.registry.Instance;
+import neton.client.Listener;
+import neton.client.WatchFactory;
+import neton.client.Watcher;
+import neton.client.registry.HeartBeat;
 
 enum HEART_TTL = 60; ///seconds
 

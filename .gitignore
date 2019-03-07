@@ -11,3 +11,4 @@ __dummy.html
 *.obj
 *.lst
 dub.selections.json
+test/test-neton-dlang

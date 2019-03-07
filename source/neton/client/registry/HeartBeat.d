@@ -1,10 +1,10 @@
-module client.registry.HeartBeat;
+module neton.client.registry.HeartBeat;
 
 import hunt.logging;
 import grpc;
-import etcdserverpb.kv;
-import etcdserverpb.rpc;
-import etcdserverpb.rpcrpc;
+import neton.protocol.neton;
+import neton.protocol.neton;
+import neton.protocol.netonrpc;
 
 import hunt.concurrency.ScheduledThreadPoolExecutor;
 import hunt.concurrency.ThreadPoolExecutor;

@@ -1,4 +1,4 @@
-module client.NetonOption;
+module neton.client.NetonOption;
 
 struct NetonOption
 {

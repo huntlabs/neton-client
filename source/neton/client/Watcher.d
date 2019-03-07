@@ -1,11 +1,11 @@
-module client.Watcher;
+module neton.client.Watcher;
 
-import etcdserverpb.kv;
-import etcdserverpb.rpc;
-import etcdserverpb.rpcrpc;
-import client.Listener;
-import client.Event;
-import util.future;
+import neton.protocol.neton;
+import neton.protocol.neton;
+import neton.protocol.netonrpc;
+import neton.client.Listener;
+import neton.client.Event;
+import neton.util.future;
 import grpc;
 import hunt.logging;
 import core.thread;
@@ -114,13 +114,13 @@ class Watcher
                     else
                     {
                         // logError("other ");
-                        foreach (etcdserverpb.kv.Event e; response.events)
+                        foreach (neton.protocol.neton.Event e; response.events)
                         {
-                            client.Event.Event event;
+                            neton.client.Event.Event event;
                             event.key = cast(string) e.kv.key;
                             event.value = cast(string) e.kv.value;
                             auto type = cast(int)(e.type);
-                            event.type = cast(client.Event.Event.EventType) type;
+                            event.type = cast(neton.client.Event.Event.EventType) type;
                             auto id = response.watchId;
                             // logError("errr start ", response.watchId);
                             if (id in _listenMap)
