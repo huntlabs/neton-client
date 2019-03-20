@@ -10,9 +10,10 @@
 	"dependencies":{
 		
 	
-		"neton-dlang":{
+		"neton-client":{
 			"path": "../"
 		}
         
-    }
+    },
+    "versions": ["HUNT_DEBUG"]
 }

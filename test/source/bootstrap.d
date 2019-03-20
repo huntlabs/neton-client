@@ -15,7 +15,7 @@ int main()
     NetonOption option = {"127.0.0.1", 50051};
     NetUtil.startEventLoop();
 
-    testRegistry(NetonFactory.createRegistryService(option));
+    // testRegistry(NetonFactory.createRegistryService(option));
     testConfig(NetonFactory.createConfigService(option));
     return 0;
 }
