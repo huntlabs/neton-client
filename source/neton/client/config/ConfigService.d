@@ -25,14 +25,15 @@ class ConfigService
 
     public string getConfig(string config, long timeoutMs = 0)
     {
+        logInfo("getConfig : ",config);
         try
         {
             RangeRequest request = new RangeRequest();
             request.key = cast(ubyte[]) config;
-            ubyte[] end = cast(ubyte[]) config.dup;
-            end[$ - 1] += 1;
-            request.rangeEnd = end;
-
+            // ubyte[] end = cast(ubyte[]) config.dup;
+            // end[$ - 1] += 1;
+            // request.rangeEnd = end;
+            assert(request.key.length != 0);
             RangeResponse response = _client.Range(request);
             if (response is null)
             {
@@ -56,13 +57,15 @@ class ConfigService
 
     public bool publishConfig(string config, string content)
     {
+        logInfo("publishConfig : ",config);
+
         try
         {
             PutRequest request = new PutRequest();
             request.key = cast(ubyte[]) config;
             request.value = cast(ubyte[]) content;
             request.lease = 0;
-
+            assert(request.key.length != 0);
             PutResponse response = _client.Put(request);
             if (response is null)
             {
@@ -81,10 +84,12 @@ class ConfigService
 
     public bool removeConfig(string config)
     {
+        logInfo("removeConfig : ",config);
         try
         {
             DeleteRangeRequest request = new DeleteRangeRequest();
             request.key = cast(ubyte[]) config;
+            assert(request.key.length != 0);
 
             DeleteRangeResponse response = _client.DeleteRange(request);
             if (response is null)

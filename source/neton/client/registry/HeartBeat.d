@@ -69,7 +69,7 @@ class HeartBeat
     {
         synchronized (this)
         {
-            writeln("------ stop heartBeat : ",_leaseID);
+            version(HUNT_DEBUG)logInfo("------ stop heartBeat : ",_leaseID);
             _executor.shutdown();
             LeaseRevokeRequest request = new LeaseRevokeRequest();
             request.ID = _leaseID;
@@ -100,7 +100,7 @@ class HeartBeatTask : Runnable
 
     void run()
     {
-        writeln("send heart beat : ",_request.ID);
+        version(HUNT_DEBUG)logInfo("send heart beat : ",_request.ID);
         LeaseKeepAliveResponse response;
         _stream.write(_request);
         _stream.read(response);

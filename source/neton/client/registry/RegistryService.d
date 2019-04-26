@@ -48,6 +48,8 @@ class RegistryService
 
     bool registerInstance(string serviceName, string ip, short port)
     {
+        logInfo("registerInstance : ",serviceName);
+
         try
         {
             string regKey = serviceName ~ "/" ~ ip ~ ":" ~ to!string(port);
@@ -66,6 +68,7 @@ class RegistryService
             request.key = cast(ubyte[])(regKey);
             request.value = cast(ubyte[])(toJson(instant).toString);
             request.lease = leaseID;
+            assert(request.key.length != 0);
 
             PutResponse response = _client.Put(request);
             if (response is null)
@@ -87,6 +90,7 @@ class RegistryService
 
     bool deregisterInstance(string serviceName, string ip, short port)
     {
+        logInfo("deregisterInstance : ",serviceName);
         try
         {
             string regKey = serviceName ~ "/" ~ ip ~ ":" ~ to!string(port);
@@ -94,6 +98,7 @@ class RegistryService
 
             DeleteRangeRequest request = new DeleteRangeRequest();
             request.key = cast(ubyte[])(regKey);
+            assert(request.key.length != 0);
 
             DeleteRangeResponse response = _client.DeleteRange(request);
             if (response is null)
@@ -118,13 +123,15 @@ class RegistryService
 
     Instance[] getAllInstances(string serviceName)
     {
+        logInfo("getAllInstances : ",serviceName);
         try
         {
             RangeRequest request = new RangeRequest();
             request.key = cast(ubyte[]) serviceName;
-            ubyte[] end = cast(ubyte[]) serviceName.dup;
-            end[$ - 1] += 1;
-            request.rangeEnd = end;
+            // ubyte[] end = cast(ubyte[]) serviceName.dup;
+            // end[$ - 1] += 1;
+            // request.rangeEnd = end;
+            assert(request.key.length != 0);
 
             RangeResponse response = _client.Range(request);
             if (response is null)
@@ -149,6 +156,7 @@ class RegistryService
 
     void subscribe(string serviceName, Listener listener)
     {
+        logInfo("subscribe : ",serviceName);
         synchronized (this)
         {
             _watcher.watch(serviceName, listener);
@@ -157,6 +165,7 @@ class RegistryService
 
     void unsubscribe(string serviceName, Listener listener)
     {
+        logInfo("unsubscribe : ",serviceName);
         synchronized (this)
         {
             _watcher.cancel(serviceName, listener);
