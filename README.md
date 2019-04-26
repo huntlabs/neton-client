@@ -28,7 +28,7 @@ assert(list.length == 1 && list[0].ip == ADDR  && list[0].port == PORT);
 service.deregisterInstance(SERVICE_NAME , ADDR,PORT);
 ```
 
-##  Configuration anagement
+##  Configuration management
 
 ```DLang
 NetonOption option = {"127.0.0.1", 50051};
